@@ -1,6 +1,6 @@
 import numpy as np
 from flask import Flask, request, render_template
-from sales_forecasting.app.helper import run_model
+from helper import run_model
 import pickle
 
 app = Flask(__name__)
