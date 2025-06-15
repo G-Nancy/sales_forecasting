@@ -1,0 +1,40 @@
+import numpy as np
+from flask import Flask, request, render_template
+from helper import run_model
+import pickle
+
+app = Flask(__name__)
+
+
+
+@app.route('/', methods=['POST', 'GET'])
+def predict():
+    if request.method == "POST":
+        store_ID = int(request.form['store_ID'])
+        day_of_week = int(request.form['day_of_week'])
+        date = request.form['date']
+        nb_customers_on_day = int(request.form['nb_customers_on_day'])
+        open = int(request.form['open'])
+        state_holiday = int(request.form['state_holiday'])
+        school_holiday = int(request.form['school_holiday'])
+
+        # parameters = [store_ID,day_of_week, date, nb_customers_on_day, open, state_holiday, school_holiday ]
+        parameters_dict = {
+            'store_ID': store_ID,
+            'day_of_week': day_of_week,
+            'date': date,
+            'nb_customers_on_day': nb_customers_on_day,
+            'open': open,
+            'state_holiday': state_holiday,
+            'school_holiday': school_holiday
+        }
+
+        output = run_model(parameters_dict)[0]
+
+        return render_template('index.html', prediction_text = output)
+    else:
+        return render_template('index.html')
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
