@@ -3,3 +3,4 @@ pandas
 numpy
 flask
 matplotlib
+xgboost
