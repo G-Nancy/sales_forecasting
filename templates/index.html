@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="'UTF-8">
+        <title> 🛸 UFO Appearance Prediction! 👽 </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+
+    </head>
+<body>
+    <div class="grid">
+        <div class ="box">
+            <p>
+                According to the number of seconds, latitude and longitude, which country is likely to have reported seeing a UFO?
+            </p>
+
+            <form action="{{url_for('predict')}}", method = "post">
+                <input type = "number" name="store_ID" placeholder="store_ID" required="required" id="store_ID"/>
+                <input type = "number" name="day_of_week" placeholder="day_of_week" required="required" id="day_of_week"/>
+                <input type = "date" name="date" placeholder="date" required="required" id="date"/>
+                <input type = "number" name="nb_customers_on_day" placeholder="nb_customers_on_day" required="required" id="nb_customers_on_day"/>
+                <input type = "number" name="open" placeholder="open" required="required" id="open" min="0" max="1"/>
+                <input type = "number" name="state_holiday" placeholder="state_holiday" required="required" id="state_holiday" min="0" max="1"/>
+                <input type = "number" name="school_holiday" placeholder="school_holiday" required="required" id="school_holiday" min="0" max="1"/>
+
+                <button type="submit" class="btn"> Predict UFO country </button>
+
+
+            </form>
+
+            <p> {{ prediction_text}} </p>
+        </div>
+    </div>
+</body>
+
+</html>
